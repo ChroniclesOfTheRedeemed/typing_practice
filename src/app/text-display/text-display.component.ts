@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Random} from '../random';
 
 @Component({
@@ -14,13 +14,18 @@ export class TextDisplayComponent implements OnInit {
 
   constructor() {
     let f = new Random();
-    for(let i = 0; i<10;i++){
+    for (let i = 0; i < 10; i++) {
       (this.words)[i] = f.getRandomWord();
       this.outputText += " " + (this.words)[i];
     }
-}
+  }
 
   ngOnInit(): void {
+  }
+
+  coolStuff(event: Event) {
+    this.outputText+= (event.target as HTMLInputElement).value;
+    (event.target as HTMLInputElement).value = "you're awesome ;) ";
   }
 
 }
