@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Random} from '../random';
-import {first} from "rxjs/operators";
 
 @Component({
   selector: 'app-text-display',
@@ -16,6 +15,9 @@ export class TextDisplayComponent implements OnInit {
   correctText: string = "";
   textToWrite: string = "";
   firstWord: string = "";
+
+  correctCount: number = 0;
+  falseCount: number = 0;
 
   constructor() {
     let f = new Random();
@@ -42,24 +44,24 @@ export class TextDisplayComponent implements OnInit {
 
       if(inputEvent.value.trim() == this.firstWord) {
         this.textToWrite+= "good job";
-        this.textToWrite = this.textToWrite.substring(this.firstWord.length+1, this.textToWrite.length);
+        this.correctCount++;
       } else {
         console.log(this.firstWord + " is not " + inputEvent.value);
-        this.textToWrite = this.textToWrite.substring(this.firstWord.length+1, this.textToWrite.length);
         this.textToWrite+= "kack noob";
+        this.falseCount++;
       }
       inputEvent.value = "";
+      this.textToWrite = this.textToWrite.substring(this.firstWord.length+1, this.textToWrite.length);
+      this.correctText += this.firstWord +" ";
       this.firstWord = this.getFirstWord(this.textToWrite);
     }
 
   }
 
   getFirstWord(text: string) {
-
-
       let endofword = text.indexOf(" ");
-console.log(this.outputText)
-    console.log(endofword)
+      console.log(this.outputText)
+      console.log(endofword)
       return text.substring(0, endofword);
   }
 
