@@ -14,5 +14,4 @@ export class Random {
     }
     return text;
   }
-
 }
